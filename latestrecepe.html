@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Receipe</title>
+  
+</head>
+<link rel="stylesheet" href="/styles/style.css"/>
+<body>
+    <div id="navbar"></div>
+    <div id="container"></div>
+    
+</body>
+</html>
+<script type="module">
+
+    import navbar from "./components/navbar.js"
+    import {getData,append} from "./scripts/showData.js"
+    
+    let navbar_div = document.getElementById("navbar")
+    
+    navbar_div.innerHTML= navbar();
+
+    let parent = document.getElementById('container');
+ 
+    let cart = JSON.parse(localStorage.getItem("cart"))
+
+    console.log(cart);
+
+    function showProducts() {
+
+    cart.forEach(({strMeal,strMealThumb,strInstructions,strYoutube})=>{
+
+        let div = document.createElement('div')
+        let p = document.createElement('p')
+        p.innerText ="Category-"+ strMeal;
+        p.style.fontSize="20px"
+        p.style.color="navy"
+        p.style.marginLeft="35%"
+
+        let des = document.createElement('p')
+        des.innerText =strInstructions;
+
+        let youtube = document.createElement('P')
+        youtube.innerText="YouTube Link -"+strYoutube;
+
+    
+
+        let img = document.createElement("img")
+
+        img.src = strMealThumb;
+        img.style.marginLeft="35%"
+        img.style.width="30%"
+
+    
+
+        div.append(img,p,des,youtube)
+
+        container.append(div)
+
+
+    })
+    }
+
+    showProducts();
+</script>
